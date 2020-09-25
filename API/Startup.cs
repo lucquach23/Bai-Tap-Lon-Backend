@@ -40,6 +40,7 @@ namespace API
 
             app.UseRouting();
 
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -47,5 +48,13 @@ namespace API
                 endpoints.MapControllers();
             });
         }
+        //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        //{
+        //    if (env.IsDevelopment())
+        //    {
+        //        app.UseDeveloperExceptionPage();
+        //    }
+        //    _ = app.UseMvc();
+        //}
     }
 }
