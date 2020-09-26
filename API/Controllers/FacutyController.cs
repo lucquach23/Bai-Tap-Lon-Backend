@@ -19,7 +19,7 @@ namespace API.Controllers
         {
             using(var context=new RegisterSubjectDBContext())
             {
-               return context.Faculty.ToList();
+               return context.Faculties.ToList();
             }
         }
         [HttpGet]
@@ -29,7 +29,7 @@ namespace API.Controllers
         {
             using (var context = new RegisterSubjectDBContext())
             {
-                return context.Faculty.Where(x => x.IdFaculty == id).ToList();
+                return context.Faculties.Where(x => x.IdFaculty == id).ToList();
             }
         }
     }
