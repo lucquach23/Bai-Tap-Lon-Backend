@@ -2,14 +2,17 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using API.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.OpenApi.Models;
 
 namespace API
 {
@@ -26,6 +29,19 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info { Title = "API WSVAP (WebSmartView)", Version = "v1" });
+            //    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
+            //});
+            //        services.AddSwaggerGen(c =>
+            //        {
+            //            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Movies Demo", Version = "v1" });
+            //            c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
+            //        });
+            services.AddDbContext<RegisterSubjectDBContext>(options =>
+    options.UseSqlServer(Configuration.GetConnectionString("RegisterSubjectDBContext")));
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,11 +58,23 @@ namespace API
 
 
             app.UseAuthorization();
+            app.UseDeveloperExceptionPage();
+            // app.UseSwagger();
+
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/ swagger / v1 / swagger.json", "Swagger Movies Demo V1");
+            //});
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("./v1/swagger.json", "My API V1"); //originally "./swagger/v1/swagger.json"
+            });
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
+
         }
         //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         //{
