@@ -13,6 +13,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
+using Newtonsoft.Json;
 
 namespace API
 {
@@ -40,7 +41,10 @@ namespace API
             //            c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
             //        });
             services.AddDbContext<RegisterSubjectDBContext>(options =>
-    options.UseSqlServer(Configuration.GetConnectionString("RegisterSubjectDBContext")));
+            options.UseSqlServer(Configuration.GetConnectionString("RegisterSubjectDBContext")));
+            services.AddMvc(option => option.EnableEndpointRouting = false)
+                .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+                .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
 
         }
 

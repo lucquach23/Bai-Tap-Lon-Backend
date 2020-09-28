@@ -12,7 +12,7 @@
     "IIS Express": {
       "commandName": "IISExpress",
       "launchBrowser": true,
-      "launchUrl": "api/Faculties",
+      "launchUrl": "api/Faculties/GetFacultyDetail/CNTT",
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }

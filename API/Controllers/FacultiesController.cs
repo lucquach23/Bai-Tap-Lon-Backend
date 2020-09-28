@@ -27,6 +27,21 @@ namespace API.Controllers
             return await _context.Faculties.ToListAsync();
         }
 
+        [HttpGet("GetFacultyDetail/{id}")]
+        public async Task<ActionResult<Faculty>> GetFacultyDetail(string id)
+        {
+            var faculty =  _context.Faculties.Include(x=>x.Departments)
+                                            .Where(x => x.IdFaculty == id)
+                                            .FirstOrDefault();
+
+            if (faculty == null)
+            {
+                return NotFound();
+            }
+
+            return faculty;
+        }
+
         // GET: api/Faculties/5
         [HttpGet("{id}")]
         public async Task<ActionResult<Faculty>> GetFaculty(string id)
@@ -98,7 +113,7 @@ namespace API.Controllers
 
             return CreatedAtAction("GetFaculty", new { id = faculty.IdFaculty }, faculty);
         }
-
+        
         // DELETE: api/Faculties/5
         [HttpDelete("{id}")]
         public async Task<ActionResult<Faculty>> DeleteFaculty(string id)
