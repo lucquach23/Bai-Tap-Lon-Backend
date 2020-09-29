@@ -45,7 +45,10 @@ namespace API
             services.AddMvc(option => option.EnableEndpointRouting = false)
                 .SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
                 .AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
-
+            services.AddSwaggerGen(gen =>
+            {
+                gen.SwaggerDoc("v1.0", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "RS API", Version = "v1.0" });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -63,16 +66,16 @@ namespace API
 
             app.UseAuthorization();
             app.UseDeveloperExceptionPage();
-            // app.UseSwagger();
+            app.UseSwagger();
 
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/ swagger / v1 / swagger.json", "Swagger Movies Demo V1");
-            //});
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("./v1/swagger.json", "My API V1"); //originally "./swagger/v1/swagger.json"
+                c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "RS API");
             });
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("./v1/swagger.json", "My API V1"); //originally "./swagger/v1/swagger.json"
+            //});
 
             app.UseEndpoints(endpoints =>
             {
