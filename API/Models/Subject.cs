@@ -13,6 +13,7 @@ namespace API.Models
         public string IdSubject { get; set; }
         public string NameSubject { get; set; }
         public int? NumberOfCredits { get; set; }
+        public string Type { get; set; }
 
         public virtual ICollection<ClassRegister> ClassRegisters { get; set; }
     }

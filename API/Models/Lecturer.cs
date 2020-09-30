@@ -7,8 +7,8 @@ namespace API.Models
     {
         public Lecturer()
         {
+            ClassMajors = new HashSet<ClassMajor>();
             ClassRegisters = new HashSet<ClassRegister>();
-            Classes = new HashSet<Class>();
         }
 
         public string IdLecturers { get; set; }
@@ -23,7 +23,7 @@ namespace API.Models
 
         public virtual Degree IdDegreeNavigation { get; set; }
         public virtual Department IdDepartmentNavigation { get; set; }
+        public virtual ICollection<ClassMajor> ClassMajors { get; set; }
         public virtual ICollection<ClassRegister> ClassRegisters { get; set; }
-        public virtual ICollection<Class> Classes { get; set; }
     }
 }

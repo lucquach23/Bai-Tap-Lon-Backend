@@ -16,7 +16,7 @@ namespace API.Models
         }
 
         public virtual DbSet<Account> Accounts { get; set; }
-        public virtual DbSet<Class> Classes { get; set; }
+        public virtual DbSet<ClassMajor> ClassMajors { get; set; }
         public virtual DbSet<ClassRegister> ClassRegisters { get; set; }
         public virtual DbSet<Degree> Degrees { get; set; }
         public virtual DbSet<Department> Departments { get; set; }
@@ -25,12 +25,13 @@ namespace API.Models
         public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
+        public virtual DbSet<TrainingMode> TrainingModes { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=RegisterSubjectDB;Integrated Security=True");
             }
         }
@@ -58,34 +59,34 @@ namespace API.Models
                     .IsFixedLength();
             });
 
-            modelBuilder.Entity<Class>(entity =>
+            modelBuilder.Entity<ClassMajor>(entity =>
             {
-                entity.HasKey(e => e.IdClass);
+                entity.HasKey(e => e.IdClass)
+                    .HasName("PK_Class");
 
-                entity.ToTable("Class");
+                entity.ToTable("ClassMajor");
 
                 entity.Property(e => e.IdClass)
                     .HasColumnName("id_class")
                     .HasMaxLength(50)
                     .IsFixedLength();
 
-                entity.Property(e => e.IdFaculty).HasColumnName("id_faculty");
+                entity.Property(e => e.IdFaculty)
+                    .HasColumnName("id_faculty")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
 
                 entity.Property(e => e.IdLecturers)
                     .HasColumnName("id_Lecturers")
                     .HasMaxLength(50)
                     .IsFixedLength();
 
-                entity.Property(e => e.IdLecturersIsGvcn).HasColumnName("id_lecturers_isGVCN");
-
                 entity.Property(e => e.NameClass)
                     .HasColumnName("name_class")
                     .HasMaxLength(250);
 
-                entity.Property(e => e.Quantity).HasColumnName("quantity");
-
                 entity.HasOne(d => d.IdLecturersNavigation)
-                    .WithMany(p => p.Classes)
+                    .WithMany(p => p.ClassMajors)
                     .HasForeignKey(d => d.IdLecturers)
                     .OnDelete(DeleteBehavior.Cascade)
                     .HasConstraintName("FK_Class_Lecturers");
@@ -288,9 +289,15 @@ namespace API.Models
                     .HasColumnName("adress")
                     .HasMaxLength(250);
 
-                entity.Property(e => e.IdClass).HasColumnName("id_class");
+                entity.Property(e => e.IdClass)
+                    .HasColumnName("id_class")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
 
-                entity.Property(e => e.IdTrainingMode).HasColumnName("id_TrainingMode");
+                entity.Property(e => e.IdTrainingMode)
+                    .HasColumnName("id_TrainingMode")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
@@ -306,6 +313,18 @@ namespace API.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.Sex).HasColumnName("sex");
+
+                entity.HasOne(d => d.IdClassNavigation)
+                    .WithMany(p => p.Students)
+                    .HasForeignKey(d => d.IdClass)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Student_ClassMajor");
+
+                entity.HasOne(d => d.IdTrainingModeNavigation)
+                    .WithMany(p => p.Students)
+                    .HasForeignKey(d => d.IdTrainingMode)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_Student_TrainingMode");
             });
 
             modelBuilder.Entity<Subject>(entity =>
@@ -324,6 +343,26 @@ namespace API.Models
                     .HasMaxLength(250);
 
                 entity.Property(e => e.NumberOfCredits).HasColumnName("number_of_credits");
+
+                entity.Property(e => e.Type)
+                    .HasColumnName("type")
+                    .HasMaxLength(250);
+            });
+
+            modelBuilder.Entity<TrainingMode>(entity =>
+            {
+                entity.HasKey(e => e.IdTrainingMode);
+
+                entity.ToTable("TrainingMode");
+
+                entity.Property(e => e.IdTrainingMode)
+                    .HasColumnName("id_trainingMode")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.NameTraing)
+                    .HasColumnName("name_traing")
+                    .HasMaxLength(250);
             });
 
             OnModelCreatingPartial(modelBuilder);
