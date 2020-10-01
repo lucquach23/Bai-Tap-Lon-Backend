@@ -10,6 +10,8 @@ namespace API.Models
         public string IdLecturers { get; set; }
         public string IdStudent { get; set; }
         public string IdSemester { get; set; }
+        public string Time { get; set; }
+        public string Room { get; set; }
 
         public virtual Lecturer IdLecturersNavigation { get; set; }
         public virtual Semester IdSemesterNavigation { get; set; }

@@ -115,7 +115,6 @@ namespace API.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.IdStudent)
-                    .IsRequired()
                     .HasColumnName("id_student")
                     .HasMaxLength(50)
                     .IsFixedLength();
@@ -124,6 +123,15 @@ namespace API.Models
                     .HasColumnName("id_subject")
                     .HasMaxLength(50)
                     .IsFixedLength();
+
+                entity.Property(e => e.Room)
+                    .HasColumnName("room")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
+
+                entity.Property(e => e.Time)
+                    .HasColumnName("time")
+                    .HasMaxLength(250);
 
                 entity.HasOne(d => d.IdLecturersNavigation)
                     .WithMany(p => p.ClassRegisters)
@@ -287,6 +295,10 @@ namespace API.Models
 
                 entity.Property(e => e.Adress)
                     .HasColumnName("adress")
+                    .HasMaxLength(250);
+
+                entity.Property(e => e.Email)
+                    .HasColumnName("email")
                     .HasMaxLength(250);
 
                 entity.Property(e => e.IdClass)
