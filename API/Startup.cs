@@ -29,17 +29,7 @@ namespace API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info { Title = "API WSVAP (WebSmartView)", Version = "v1" });
-            //    c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First()); //This line
-            //});
-            //        services.AddSwaggerGen(c =>
-            //        {
-            //            c.SwaggerDoc("v1", new OpenApiInfo { Title = "Swagger Movies Demo", Version = "v1" });
-            //            c.ResolveConflictingActions(apiDescriptions => apiDescriptions.First());
-            //        });
+            services.AddControllers();           
             services.AddDbContext<RegisterSubjectDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("RegisterSubjectDBContext")));
             services.AddMvc(option => option.EnableEndpointRouting = false)
@@ -58,38 +48,27 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-
+            app.UseCors(builder =>
+            {
+                builder.WithOrigins("http://localhost:4200");
+                builder.AllowAnyMethod();
+                builder.AllowAnyHeader();
+            });
             app.UseHttpsRedirection();
-
             app.UseRouting();
-
-
             app.UseAuthorization();
             app.UseDeveloperExceptionPage();
             app.UseSwagger();
-
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1.0/swagger.json", "RS API");
-            });
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("./v1/swagger.json", "My API V1"); //originally "./swagger/v1/swagger.json"
-            //});
-
+            });           
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
             });
 
         }
-        //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        //{
-        //    if (env.IsDevelopment())
-        //    {
-        //        app.UseDeveloperExceptionPage();
-        //    }
-        //    _ = app.UseMvc();
-        //}
+      
     }
 }
