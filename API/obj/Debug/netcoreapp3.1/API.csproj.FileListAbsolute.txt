@@ -158,6 +158,7 @@ C:\Users\Admin\source\repos\RegisterSubjectAPI\API\bin\Debug\netcoreapp3.1\Newto
 C:\Users\Admin\source\repos\RegisterSubjectAPI\API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Admin\source\repos\RegisterSubjectAPI\API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Admin\source\repos\RegisterSubjectAPI\API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\Users\Admin\source\repos\RegisterSubjectAPI\API\bin\Debug\netcoreapp3.1\Microsoft.AspNetCore.Authentication.JwtBearer.dll
 C:\Users\Admin\source\repos\RegisterSubjectAPI\API\obj\Debug\netcoreapp3.1\API.csproj.CoreCompileInputs.cache
 C:\Users\Admin\source\repos\RegisterSubjectAPI\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cs
 C:\Users\Admin\source\repos\RegisterSubjectAPI\API\obj\Debug\netcoreapp3.1\API.MvcApplicationPartsAssemblyInfo.cache
