@@ -21,11 +21,18 @@ namespace API.Controllers
         }
 
         // GET: api/Accounts
+        //get list acc
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
             return await _context.Accounts.ToListAsync();
         }
+
+
+
+
+
+
 
         // GET: api/Accounts/5
         [HttpGet("{id}")]
