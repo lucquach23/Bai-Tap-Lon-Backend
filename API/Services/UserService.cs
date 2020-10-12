@@ -24,9 +24,9 @@ namespace WebApi.Services
         private List<User> _users = new List<User>
         { 
             new User { Id = 1, FirstName = "Đông", LastName = "Nguyễn Hữu", Username = "admin", Password = "admin", Role = Role.Admin },
-            new User { Id = 2, FirstName = "Huệ", LastName = "Nguyễn Thị Thanh", Username = "user", Password = "user", Role = Role.User },
-            new User { Id = 3, FirstName = "Thảo", LastName = "Nguyễn Diệu", Username = "user1", Password = "user1", Role = Role.User },
-            new User { Id = 4, FirstName = "Khôi", LastName = "Nguyễn Minh", Username = "user2", Password = "user2", Role = Role.User }
+            new User { Id = 2, FirstName = "Huệ", LastName = "Nguyễn Thị Thanh", Username = "gv01", Password = "gv01", Role = Role.Gv },
+            new User { Id = 3, FirstName = "Thảo", LastName = "Nguyễn Diệu", Username = "sv01", Password = "sv01", Role = Role.Sv },
+           
         };
 
         private readonly AppSettings _appSettings;

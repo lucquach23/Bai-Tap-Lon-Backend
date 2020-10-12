@@ -22,6 +22,7 @@ namespace API.Models
         public virtual DbSet<Department> Departments { get; set; }
         public virtual DbSet<Faculty> Faculties { get; set; }
         public virtual DbSet<Lecturer> Lecturers { get; set; }
+        public virtual DbSet<ListCr> ListCrs { get; set; }
         public virtual DbSet<Semester> Semesters { get; set; }
         public virtual DbSet<Student> Students { get; set; }
         public virtual DbSet<Subject> Subjects { get; set; }
@@ -31,7 +32,7 @@ namespace API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=RegisterSubjectDB;Integrated Security=True");
             }
         }
@@ -52,6 +53,10 @@ namespace API.Models
                     .IsFixedLength();
 
                 entity.Property(e => e.Role).HasColumnName("role");
+
+                entity.Property(e => e.Token)
+                    .HasColumnName("token")
+                    .HasColumnType("text");
 
                 entity.Property(e => e.UserName)
                     .HasColumnName("userName")
@@ -114,11 +119,6 @@ namespace API.Models
                     .HasMaxLength(50)
                     .IsFixedLength();
 
-                entity.Property(e => e.IdStudent)
-                    .HasColumnName("id_student")
-                    .HasMaxLength(50)
-                    .IsFixedLength();
-
                 entity.Property(e => e.IdSubject)
                     .HasColumnName("id_subject")
                     .HasMaxLength(50)
@@ -129,9 +129,18 @@ namespace API.Models
                     .HasMaxLength(10)
                     .IsFixedLength();
 
+                entity.Property(e => e.Thu)
+                    .HasColumnName("thu")
+                    .HasMaxLength(250);
+
                 entity.Property(e => e.Time)
                     .HasColumnName("time")
                     .HasMaxLength(250);
+
+                entity.Property(e => e.Week)
+                    .HasColumnName("week")
+                    .HasMaxLength(10)
+                    .IsFixedLength();
 
                 entity.HasOne(d => d.IdLecturersNavigation)
                     .WithMany(p => p.ClassRegisters)
@@ -265,6 +274,32 @@ namespace API.Models
                     .HasConstraintName("FK_Lecturers_Department");
             });
 
+            modelBuilder.Entity<ListCr>(entity =>
+            {
+                entity.HasKey(e => e.IdCr)
+                    .HasName("PK_ListCR_1");
+
+                entity.ToTable("ListCR");
+
+                entity.Property(e => e.IdCr).HasColumnName("id_CR");
+
+                entity.Property(e => e.IdClassRegister)
+                    .HasColumnName("id_ClassRegister")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.IdStudent)
+                    .HasColumnName("id_Student")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.HasOne(d => d.IdClassRegisterNavigation)
+                    .WithMany(p => p.ListCrs)
+                    .HasForeignKey(d => d.IdClassRegister)
+                    .OnDelete(DeleteBehavior.Cascade)
+                    .HasConstraintName("FK_ListCR_ClassRegister");
+            });
+
             modelBuilder.Entity<Semester>(entity =>
             {
                 entity.HasKey(e => e.IdSemester)
@@ -303,6 +338,11 @@ namespace API.Models
 
                 entity.Property(e => e.IdClass)
                     .HasColumnName("id_class")
+                    .HasMaxLength(50)
+                    .IsFixedLength();
+
+                entity.Property(e => e.IdDepartment)
+                    .HasColumnName("id_department")
                     .HasMaxLength(50)
                     .IsFixedLength();
 

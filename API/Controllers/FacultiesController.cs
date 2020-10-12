@@ -28,19 +28,19 @@ namespace API.Controllers
         }
 
         [HttpGet("GetFacultyDetail/{id}")]
-        public async Task<ActionResult<Faculty>> GetFacultyDetail(string id)
-        {
-            var faculty =  _context.Faculties.Include(x=>x.Departments)
-                                            .Where(x => x.IdFaculty == id)
-                                            .FirstOrDefault();
+        //public async Task<ActionResult<Faculty>> GetFacultyDetail(string id)
+        //{
+        //    var faculty =  _context.Faculties.Include(x=>x.Departments)
+        //                                    .Where(x => x.IdFaculty == id)
+        //                                    .FirstOrDefault();
 
-            if (faculty == null)
-            {
-                return NotFound();
-            }
+        //    if (faculty == null)
+        //    {
+        //        return NotFound();
+        //    }
 
-            return faculty;
-        }
+        //    return faculty;
+        //}
 
         // GET: api/Faculties/5
         [HttpGet("{id}")]

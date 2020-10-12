@@ -7,6 +7,7 @@ namespace API.Models
     {
         public string IdStudent { get; set; }
         public string IdClass { get; set; }
+        public string IdDepartment { get; set; }
         public string IdTrainingMode { get; set; }
         public string Name { get; set; }
         public bool? Sex { get; set; }
