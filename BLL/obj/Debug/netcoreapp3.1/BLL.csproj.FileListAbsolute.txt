@@ -7,3 +7,8 @@ C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\bin\Debug\netcoreapp3.1\BLL.d
 C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\bin\Debug\netcoreapp3.1\BLL.pdb
 C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\obj\Debug\netcoreapp3.1\BLL.dll
 C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\obj\Debug\netcoreapp3.1\BLL.pdb
+C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\bin\Debug\netcoreapp3.1\DAL.dll
+C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\bin\Debug\netcoreapp3.1\Models.dll
+C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\bin\Debug\netcoreapp3.1\DAL.pdb
+C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\bin\Debug\netcoreapp3.1\Models.pdb
+C:\Users\Admin\source\repos\RegisterSubjectAPI\BLL\obj\Debug\netcoreapp3.1\BLL.csproj.CopyComplete
