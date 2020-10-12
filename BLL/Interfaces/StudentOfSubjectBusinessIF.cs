@@ -5,8 +5,8 @@ using System.Text;
 
 namespace BLL.Interfaces
 {
-    public partial interface ClassOfStudentBusinessIF
+    public partial interface StudentOfSubjectBusinessIF
     {
-        List<ClassOfStudent> GetDatabyID(string id);
+        List<StudentOfSubject> GetDatabyID(string id);
     }
 }

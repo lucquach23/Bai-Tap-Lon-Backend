@@ -9,14 +9,14 @@ using System.Text;
 
 namespace BLL
 {
-  public partial  class ClassOfStudentBusiness : ClassOfStudentBusinessIF
+  public partial  class StudentOfSubjectBusiness : StudentOfSubjectBusinessIF
     {
-        private ClassOfStudentRepositoryIF _res;
-        public ClassOfStudentBusiness(ClassOfStudentRepositoryIF cos)
+        private StudentOfSubjectRepositoryIF _res;
+        public StudentOfSubjectBusiness(StudentOfSubjectRepositoryIF cos)
         {
             _res = cos;
         }
-        public List<ClassOfStudent> GetDatabyID(string id)
+        public List<StudentOfSubject> GetDatabyID(string id)
         {
             return _res.GetDatabyID(id);
         }

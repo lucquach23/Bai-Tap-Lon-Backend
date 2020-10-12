@@ -12,6 +12,17 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Hosting;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using BLL;
+using DAL;
+using DAL.Helper;
+using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.Extensions.Logging;
+using DAL.Interfaces;
+using BLL.Interfaces;
 
 
 namespace API
@@ -20,8 +31,17 @@ namespace API
     {
         public Startup(IConfiguration configuration)
         {
-            Configuration = configuration;
+           Configuration = configuration;
         }
+        //public Startup(IWebHostEnvironment env)
+        //{
+        //    var builder = new ConfigurationBuilder()
+        //       .SetBasePath(env.ContentRootPath)
+        //       .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
+        //       .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
+        //       .AddEnvironmentVariables();
+        //    Configuration = builder.Build();
+        //}
 
         public IConfiguration Configuration { get; }
 
@@ -29,6 +49,21 @@ namespace API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers();
+            services.AddCors(options => {
+                options.AddPolicy("AllowAll", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader());
+            });
+            services.AddControllers();
+            services.AddTransient<IDatabaseHelper, DatabaseHelper>();
+            services.AddTransient<ClassOfStudentRepositoryIF, ClassOfStudentRepository>();
+            services.AddTransient<ClassOfStudentBusinessIF, ClassOfStudentBusiness>();
+
+            services.AddTransient<StudentOfSubjectRepositoryIF, StudentOfSubjectRepository>();
+            services.AddTransient<StudentOfSubjectBusinessIF, StudentOfSubjectBusiness>();
+
+            services.AddTransient<ListSubjectClassRepositoryIF, ListSubjectClassRepository>();
+            services.AddTransient<ListSubjectClassBusinessIF, ListSubjectClassBusiness>();
+
+
             services.AddDbContext<RegisterSubjectDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("RegisterSubjectDBContext")));
             services.AddMvc(option => option.EnableEndpointRouting = false)
@@ -84,13 +119,13 @@ namespace API
             //    builder.AllowAnyHeader();
             //});
 
-
             // global cors policy
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
-
+           // app.UseCors("AllowAll");
+            //app.UseApiMiddleware();
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -107,27 +142,6 @@ namespace API
             {
                 endpoints.MapControllers();
             });
-
-
-
-
-            //app.UseRouting();
-
-            //// global cors policy
-            //app.UseCors(x => x
-            //    .AllowAnyOrigin()
-            //    .AllowAnyMethod()
-            //    .AllowAnyHeader());
-
-            //app.UseAuthentication();
-            //app.UseAuthorization();
-
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapControllers();
-            //});
-
-
         }
       
     }

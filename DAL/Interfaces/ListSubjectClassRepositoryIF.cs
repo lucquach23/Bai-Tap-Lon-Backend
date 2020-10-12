@@ -5,8 +5,8 @@ using System.Text;
 
 namespace DAL.Interfaces
 {
-    public partial interface ClassOfStudentRepositoryIF
+    public partial interface ListSubjectClassRepositoryIF
     {
-        List<ClassOfStudent> GetDatabyID(string id);
+        List<ListSubjectClass> GetData();
     }
 }

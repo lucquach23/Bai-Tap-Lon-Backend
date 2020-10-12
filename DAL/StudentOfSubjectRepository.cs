@@ -8,23 +8,23 @@ using DAL.Interfaces;
 
 namespace DAL
 {
-   public partial class ClassOfStudentRepository : ClassOfStudentRepositoryIF
+   public partial class StudentOfSubjectRepository : StudentOfSubjectRepositoryIF
     {
         private IDatabaseHelper _dbHelper;
-        public ClassOfStudentRepository(IDatabaseHelper dbHelper)
+        public StudentOfSubjectRepository(IDatabaseHelper dbHelper)
         {
             _dbHelper = dbHelper;
         }
-        public List<ClassOfStudent> GetDatabyID(string id)
+        public List<StudentOfSubject> GetDatabyID(string id)
         {
             string msgError = "";
             try
             {
-                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getSubjectRegisterbyIdStudent",
-                     "@IdStudent", id);
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getListStudentRegisterSubjectByIdLecturer",
+                     "@IdLecturer", id);
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
-                return dt.ConvertTo<ClassOfStudent>().ToList();
+                return dt.ConvertTo<StudentOfSubject>().ToList();
             }
             catch (Exception ex)
             {
