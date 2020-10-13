@@ -21,18 +21,11 @@ namespace API.Controllers
         }
 
         // GET: api/Accounts
-        //get list acc
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Account>>> GetAccounts()
         {
             return await _context.Accounts.ToListAsync();
         }
-
-
-
-
-
-
 
         // GET: api/Accounts/5
         [HttpGet("{id}")]
@@ -48,13 +41,25 @@ namespace API.Controllers
             return account;
         }
 
+        [Route("getAccByUserName/{username}")]
+        [HttpGet]
+        public List<Account> getAccByUserName(string username)
+        {
+            return _context.Accounts.Where(x => x.UserName == username).ToList();
+        }
+
+
+
+
+
+
         // PUT: api/Accounts/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutAccount(int id, Account account)
         {
-            if (id != account.IdAccount)
+            if (id != account.Id)
             {
                 return BadRequest();
             }
@@ -89,7 +94,7 @@ namespace API.Controllers
             _context.Accounts.Add(account);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetAccount", new { id = account.IdAccount }, account);
+            return CreatedAtAction("GetAccount", new { id = account.Id }, account);
         }
 
         // DELETE: api/Accounts/5
@@ -110,7 +115,7 @@ namespace API.Controllers
 
         private bool AccountExists(int id)
         {
-            return _context.Accounts.Any(e => e.IdAccount == id);
+            return _context.Accounts.Any(e => e.Id == id);
         }
     }
 }

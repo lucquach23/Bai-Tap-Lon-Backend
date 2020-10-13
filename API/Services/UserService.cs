@@ -4,6 +4,10 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
+using API.Models;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Entities;
@@ -13,21 +17,39 @@ namespace WebApi.Services
 {
     public interface IUserService
     {
-        User Authenticate(string username, string password);
-        IEnumerable<User> GetAll();
-        User GetById(int id);
+        Account Authenticate(string username, string password);
+        IEnumerable<Account> GetAll();
+        Account GetById(int id);
     }
+
 
     public class UserService : IUserService
     {
-        // users hardcoded for simplicity, store in a db with hashed passwords in production applications
-        private List<User> _users = new List<User>
-        { 
-            new User { Id = 1, FirstName = "Đông", LastName = "Nguyễn Hữu", Username = "admin", Password = "admin", Role = Role.Admin },
-            new User { Id = 2, FirstName = "Huệ", LastName = "Nguyễn Thị Thanh", Username = "gv01", Password = "gv01", Role = Role.Gv },
-            new User { Id = 3, FirstName = "Thảo", LastName = "Nguyễn Diệu", Username = "sv01", Password = "sv01", Role = Role.Sv },
-           
-        };
+        //public RegisterSubjectDBContext _context;
+
+        //public UserService(RegisterSubjectDBContext context)
+        //{
+        //    _context = context;
+
+        //}
+        List<Account> _users;
+        public List<Account> getList()
+        {
+            using (RegisterSubjectDBContext db=new RegisterSubjectDBContext())
+            {
+                return _users = db.Accounts.ToList();
+            }                        
+        }
+       
+
+        //private List<User> _users = new List<User>
+        //{
+        //    new User { Id = 1, FirstName = "Đông", LastName = "Nguyễn Hữu", Username = "admin", Password = "admin", Role = Role.Admin },
+        //    new User { Id = 2, FirstName = "Huệ", LastName = "Nguyễn Thị Thanh", Username = "gv01", Password = "gv01", Role = Role.Gv },
+        //    new User { Id = 3, FirstName = "Thảo", LastName = "Nguyễn Diệu", Username = "sv01", Password = "sv01", Role = Role.Sv },
+
+        //};
+
 
         private readonly AppSettings _appSettings;
 
@@ -36,9 +58,10 @@ namespace WebApi.Services
             _appSettings = appSettings.Value;
         }
 
-        public User Authenticate(string username, string password)
+        public Account Authenticate(string username, string password)
         {
-            var user = _users.SingleOrDefault(x => x.Username == username && x.Password == password);
+            getList();
+            var user = _users.SingleOrDefault(x => x.UserName == username && x.PassWord == password);
 
             // return null if user not found
             if (user == null)
@@ -49,7 +72,7 @@ namespace WebApi.Services
             var key = Encoding.ASCII.GetBytes(_appSettings.Secret);
             var tokenDescriptor = new SecurityTokenDescriptor
             {
-                Subject = new ClaimsIdentity(new Claim[] 
+                Subject = new ClaimsIdentity(new Claim[]
                 {
                     new Claim(ClaimTypes.Name, user.Id.ToString()),
                     new Claim(ClaimTypes.Role, user.Role)
@@ -63,13 +86,15 @@ namespace WebApi.Services
             return user.WithoutPassword();
         }
 
-        public IEnumerable<User> GetAll()
+        public IEnumerable<Account> GetAll()
         {
+            getList();
             return _users.WithoutPasswords();
         }
 
-        public User GetById(int id) 
+        public Account GetById(int id)
         {
+            getList();
             var user = _users.FirstOrDefault(x => x.Id == id);
             return user.WithoutPassword();
         }

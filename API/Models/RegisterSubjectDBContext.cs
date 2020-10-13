@@ -32,7 +32,7 @@ namespace API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=RegisterSubjectDB;Integrated Security=True");
             }
         }
@@ -41,27 +41,23 @@ namespace API.Models
         {
             modelBuilder.Entity<Account>(entity =>
             {
-                entity.HasKey(e => e.IdAccount);
-
                 entity.ToTable("Account");
 
-                entity.Property(e => e.IdAccount).HasColumnName("id_account");
+                entity.Property(e => e.FirstName).HasMaxLength(50);
 
-                entity.Property(e => e.Pass)
-                    .HasColumnName("pass")
+                entity.Property(e => e.LastName).HasMaxLength(50);
+
+                entity.Property(e => e.PassWord)
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
-                entity.Property(e => e.Role).HasColumnName("role");
-
-                entity.Property(e => e.Token)
-                    .HasColumnName("token")
-                    .HasColumnType("text");
+                entity.Property(e => e.Role)
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.UserName)
-                    .HasColumnName("userName")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
             });
 
             modelBuilder.Entity<ClassMajor>(entity =>
@@ -74,7 +70,7 @@ namespace API.Models
                 entity.Property(e => e.IdClass)
                     .HasColumnName("id_class")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdFaculty)
                     .HasColumnName("id_faculty")
@@ -84,7 +80,7 @@ namespace API.Models
                 entity.Property(e => e.IdLecturers)
                     .HasColumnName("id_Lecturers")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NameClass)
                     .HasColumnName("name_class")
@@ -107,27 +103,27 @@ namespace API.Models
                 entity.Property(e => e.IdClassRegister)
                     .HasColumnName("id_ClassRegister")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdLecturers)
                     .HasColumnName("id_lecturers")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdSemester)
                     .HasColumnName("id_Semester")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdSubject)
                     .HasColumnName("id_subject")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Room)
                     .HasColumnName("room")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Thu)
                     .HasColumnName("thu")
@@ -139,8 +135,8 @@ namespace API.Models
 
                 entity.Property(e => e.Week)
                     .HasColumnName("week")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.IdLecturersNavigation)
                     .WithMany(p => p.ClassRegisters)
@@ -169,7 +165,7 @@ namespace API.Models
                 entity.Property(e => e.IdDegree)
                     .HasColumnName("id_degree")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NameDegree)
                     .HasColumnName("name_degree")
@@ -185,12 +181,12 @@ namespace API.Models
                 entity.Property(e => e.IdDepartment)
                     .HasColumnName("id_department")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdFaculty)
                     .HasColumnName("id_faculty")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NameDepartment)
                     .HasColumnName("name_department")
@@ -212,7 +208,7 @@ namespace API.Models
                 entity.Property(e => e.IdFaculty)
                     .HasColumnName("id_faculty")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NameFaculty)
                     .HasColumnName("name_faculty")
@@ -226,7 +222,7 @@ namespace API.Models
                 entity.Property(e => e.IdLecturers)
                     .HasColumnName("id_lecturers")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Adress)
                     .HasColumnName("adress")
@@ -239,12 +235,12 @@ namespace API.Models
                 entity.Property(e => e.IdDegree)
                     .HasColumnName("id_degree")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdDepartment)
                     .HasColumnName("id_department")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
@@ -256,8 +252,8 @@ namespace API.Models
 
                 entity.Property(e => e.Phone)
                     .HasColumnName("phone")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Sex).HasColumnName("sex");
 
@@ -286,12 +282,12 @@ namespace API.Models
                 entity.Property(e => e.IdClassRegister)
                     .HasColumnName("id_ClassRegister")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdStudent)
                     .HasColumnName("id_Student")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.HasOne(d => d.IdClassRegisterNavigation)
                     .WithMany(p => p.ListCrs)
@@ -310,7 +306,7 @@ namespace API.Models
                 entity.Property(e => e.IdSemester)
                     .HasColumnName("id_semester")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
@@ -326,11 +322,15 @@ namespace API.Models
                 entity.Property(e => e.IdStudent)
                     .HasColumnName("id_student")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Adress)
                     .HasColumnName("adress")
                     .HasMaxLength(250);
+
+                entity.Property(e => e.Birthday)
+                    .HasColumnName("birthday")
+                    .HasColumnType("datetime");
 
                 entity.Property(e => e.Email)
                     .HasColumnName("email")
@@ -339,17 +339,17 @@ namespace API.Models
                 entity.Property(e => e.IdClass)
                     .HasColumnName("id_class")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdDepartment)
                     .HasColumnName("id_department")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.IdTrainingMode)
                     .HasColumnName("id_TrainingMode")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Name)
                     .HasColumnName("name")
@@ -361,8 +361,8 @@ namespace API.Models
 
                 entity.Property(e => e.Phone)
                     .HasColumnName("phone")
-                    .HasMaxLength(10)
-                    .IsFixedLength();
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
 
                 entity.Property(e => e.Sex).HasColumnName("sex");
 
@@ -388,7 +388,7 @@ namespace API.Models
                 entity.Property(e => e.IdSubject)
                     .HasColumnName("id_subject")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NameSubject)
                     .HasColumnName("name_subject")
@@ -410,7 +410,7 @@ namespace API.Models
                 entity.Property(e => e.IdTrainingMode)
                     .HasColumnName("id_trainingMode")
                     .HasMaxLength(50)
-                    .IsFixedLength();
+                    .IsUnicode(false);
 
                 entity.Property(e => e.NameTraing)
                     .HasColumnName("name_traing")

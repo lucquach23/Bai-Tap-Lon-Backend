@@ -63,6 +63,12 @@ namespace API
             services.AddTransient<ListSubjectClassRepositoryIF, ListSubjectClassRepository>();
             services.AddTransient<ListSubjectClassBusinessIF, ListSubjectClassBusiness>();
 
+            services.AddTransient<ClassMajorWithRegistionRepositoryIF, ClassMajorWithRegistionRepository>();
+            services.AddTransient<ClassMajorWithRegistionBusinessIF, ClassMajorWithRegistionBusiness>();
+
+            services.AddTransient<IUserService, UserService>();
+            
+
 
             services.AddDbContext<RegisterSubjectDBContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("RegisterSubjectDBContext")));

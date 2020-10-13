@@ -16,18 +16,26 @@ namespace API.Controllers
         private ClassOfStudentBusinessIF _classOfStudent;
         private StudentOfSubjectBusinessIF _studentOfSubjectClass;
         private ListSubjectClassBusinessIF _listSubjectClass;
+        private ClassMajorWithRegistionBusinessIF _classMajorWithRegistion;
         public ClassRegistionController(
-            ClassOfStudentBusinessIF a, 
-            StudentOfSubjectBusinessIF b, 
-            ListSubjectClassBusinessIF c
+            ClassOfStudentBusinessIF a,
+            StudentOfSubjectBusinessIF b,
+            ListSubjectClassBusinessIF c,
+            ClassMajorWithRegistionBusinessIF d
             )
         {
             _classOfStudent = a;
             _studentOfSubjectClass = b;
             _listSubjectClass = c;
+            _classMajorWithRegistion = d;
         }
-        [Route("getClassOfStudentById/{id}")]
+
+
+
+
+
         // api lấy danh sách các lớp mà sinh viên đã đăng kí học theo mã sinh viên
+        [Route("getClassOfStudentById/{id}")]
         [HttpGet]
         public List<ClassOfStudent> getClassOfStudentById(string id)
         {
@@ -49,6 +57,17 @@ namespace API.Controllers
         public List<ListSubjectClass> getListSubjectClass()
         {
             return _listSubjectClass.GetData();
+        }
+
+
+        //api lấy về danh sách lớp chuyên ngành cùng với số lượng đăng kí , và tổng số tín chỉ
+        [Route("getListClassMajorWithRegistionByIdClassMajor/{id}")]
+        [HttpGet]
+        public List<ClassMajorWithRegistion> getListClassMajorWithRegistionByIdClassMajor(string id)
+        {
+            return _classMajorWithRegistion.GetDatabyID(id);
+
+
         }
     }
 }

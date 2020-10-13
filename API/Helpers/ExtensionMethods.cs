@@ -1,3 +1,4 @@
+using API.Models;
 using System.Collections.Generic;
 using System.Linq;
 using WebApi.Entities;
@@ -6,18 +7,18 @@ namespace WebApi.Helpers
 {
     public static class ExtensionMethods
     {
-        public static IEnumerable<User> WithoutPasswords(this IEnumerable<User> users) 
+        public static IEnumerable<Account> WithoutPasswords(this IEnumerable<Account> users) 
         {
             if (users == null) return null;
 
             return users.Select(x => x.WithoutPassword());
         }
 
-        public static User WithoutPassword(this User user) 
+        public static Account WithoutPassword(this Account user) 
         {
             if (user == null) return null;
 
-            user.Password = null;
+            user.PassWord = null;
             return user;
         }
     }
