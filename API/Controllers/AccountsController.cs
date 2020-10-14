@@ -43,9 +43,9 @@ namespace API.Controllers
 
         [Route("getAccByUserName/{username}")]
         [HttpGet]
-        public List<Account> getAccByUserName(string username)
+        public List<Student> getAccByUserName(string username)
         {
-            return _context.Accounts.Where(x => x.UserName == username).ToList();
+            return _context.Students.Where(x => x.IdStudent == username).ToList();
         }
 
 

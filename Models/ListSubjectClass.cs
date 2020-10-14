@@ -8,6 +8,7 @@ namespace Models
     {
         public string id_ClassRegister { get; set; }
         public string name_subject { get; set; }
+        public int number_of_credits { get; set; }
         public string name { get; set; }
         public string id_lecturers { get; set; }
         public string thu { get; set; }
