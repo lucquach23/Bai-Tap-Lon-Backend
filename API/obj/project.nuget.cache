@@ -1,10 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "3J97f4A4vKuHgOnNXhaoVJd1Db6jos3yXnQ4wyq+arg6P4yCy53KmIZqKXdd5UEvgLTun3v/OGmxepZ8BEVZ5w==",
+  "dgSpecHash": "A8SYlZ5zoNjKu5cOA3SqOAGubWKeTTZgKz6V/1JPNPHziS3+8uQslOj7qrUunJ3pRue1r+5VgGJTNoEgTgo4vA==",
   "success": true,
   "projectFilePath": "C:\\Users\\Admin\\source\\repos\\RegisterSubjectAPI\\API\\API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Admin\\.nuget\\packages\\bricelam.entityframeworkcore.pluralizer\\1.0.0\\bricelam.entityframeworkcore.pluralizer.1.0.0.nupkg.sha512",
+    "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnet.webapi.client\\5.2.7\\microsoft.aspnet.webapi.client.5.2.7.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\3.1.8\\microsoft.aspnetcore.authentication.jwtbearer.3.1.8.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.html.abstractions\\2.2.0\\microsoft.aspnetcore.html.abstractions.2.2.0.nupkg.sha512",
     "C:\\Users\\Admin\\.nuget\\packages\\microsoft.aspnetcore.jsonpatch\\3.1.8\\microsoft.aspnetcore.jsonpatch.3.1.8.nupkg.sha512",

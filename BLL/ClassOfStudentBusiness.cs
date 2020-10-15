@@ -20,5 +20,9 @@ namespace BLL
         {
             return _res.GetDatabyID(id);
         }
+        public bool DeleteCO(string id_cr,string id_student)
+        {
+            return _res.DeleteCO(id_cr, id_student);
+        }
     }
 }

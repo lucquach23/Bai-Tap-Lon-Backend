@@ -6,6 +6,11 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
+using System.Net.Http;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.Net.Http.Formatting;
+
 
 namespace API.Controllers
 {
@@ -100,6 +105,30 @@ namespace API.Controllers
 
             return listCr;
         }
+
+        [Route("removeCO/{id_cr}/{id_student}")]
+        [HttpDelete]
+        public void Remove(string id_cr,string id_student)
+        {                                          
+            using (RegisterSubjectDBContext db = new RegisterSubjectDBContext())
+                    {
+                        ListCr s = db.ListCrs.SingleOrDefault(x => x.IdClassRegister == id_cr&&x.IdStudent==id_student);
+                        db.ListCrs.Remove(s);
+                        db.SaveChanges();
+                    }
+        }
+        [Route("removeAll/{id_student}")]
+        [HttpDelete]
+        public void RemoveAll(string id_student)
+        {
+            using (RegisterSubjectDBContext db = new RegisterSubjectDBContext())
+            {
+                List<ListCr> s = db.ListCrs.Where(x => x.IdStudent == id_student).ToList();
+                db.ListCrs.RemoveRange(s);
+                db.SaveChanges();
+            }
+        }
+
 
         private bool ListCrExists(int id)
         {

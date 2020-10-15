@@ -69,5 +69,22 @@ namespace API.Controllers
 
 
         }
+        [Route("deleteCO")]
+        [HttpDelete]
+        public IActionResult DeleteUser([FromBody] Dictionary<string, object> formData)
+        {
+            string id_cr = "";
+            string id_student = "";
+            if (formData.Keys.Contains("id_cr") && !string.IsNullOrEmpty(Convert.ToString(formData["id_cr"])))
+            {
+                id_cr = Convert.ToString(formData["id_cr"]);
+            }
+            if (formData.Keys.Contains("id_student") && !string.IsNullOrEmpty(Convert.ToString(formData["id_student"])))
+            {
+                id_student = Convert.ToString(formData["id_student"]);
+            }
+            _classOfStudent.DeleteCO(id_cr,id_student);
+            return Ok();
+        }
     }
 }

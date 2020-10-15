@@ -31,6 +31,24 @@ namespace DAL
                 throw ex;
             }
         }
-
+        public bool DeleteCO(string id_cr,string id_student)
+        {
+            string msgError = "";
+            try
+            {
+                var result = _dbHelper.ExecuteScalarSProcedureWithTransaction(out msgError, "deleteClassOpen",
+                "@id_cr", id_cr,
+                "@id_stud",id_student);
+                if ((result != null && !string.IsNullOrEmpty(result.ToString())) || !string.IsNullOrEmpty(msgError))
+                {
+                    throw new Exception(Convert.ToString(result) + msgError);
+                }
+                return true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

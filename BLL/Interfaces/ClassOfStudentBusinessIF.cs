@@ -8,5 +8,6 @@ namespace BLL.Interfaces
     public partial interface ClassOfStudentBusinessIF
     {
         List<ClassOfStudent> GetDatabyID(string id);
+        bool DeleteCO(string id_cr, string id_student);
     }
 }
