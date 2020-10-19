@@ -41,6 +41,33 @@ namespace API.Controllers
             return classRegister;
         }
 
+
+        [Route("layLopGvDaDangKi/{id_gv}")]
+        [HttpGet]
+        public List<ClassRegister> getInfoGv(string id_gv)
+        {
+            return _context.ClassRegisters.Include(x=>x.IdSubjectNavigation)
+                .Where(x => x.IdLecturers == id_gv).ToList();
+        }
+
+
+        [Route("removeAll/{id_gv}")]
+        [HttpDelete]
+        public void RemoveAll(string id_gv)
+        {
+            using (RegisterSubjectDBContext db = new RegisterSubjectDBContext())
+            {
+                List<ClassRegister> s = db.ClassRegisters.Where(x => x.IdLecturers == id_gv).ToList();
+                db.ClassRegisters.RemoveRange(s);
+                db.SaveChanges();
+            }
+        }
+
+
+
+
+
+
         // PUT: api/ClassRegisters/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
@@ -114,6 +141,7 @@ namespace API.Controllers
 
             return classRegister;
         }
+
 
         private bool ClassRegisterExists(string id)
         {
