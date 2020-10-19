@@ -66,6 +66,9 @@ namespace API
             services.AddTransient<ClassMajorWithRegistionRepositoryIF, ClassMajorWithRegistionRepository>();
             services.AddTransient<ClassMajorWithRegistionBusinessIF, ClassMajorWithRegistionBusiness>();
 
+            services.AddTransient<ListSubjectRepositoryIF, ListSubjectRepository>();
+            services.AddTransient<ListSubjectBusinessIF, ListSubjectBusiness>();
+
             services.AddTransient<IUserService, UserService>();
             
 
@@ -135,6 +138,9 @@ namespace API
             app.UseAuthentication();
             app.UseAuthorization();
 
+
+
+
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();
@@ -146,7 +152,10 @@ namespace API
             });
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapControllers();
+              //  endpoints.MapControllers();
+                endpoints.MapControllerRoute(
+                name: "default",
+                pattern: "{controller=Home}/{action=Index}/{id?}");
             });
         }
       

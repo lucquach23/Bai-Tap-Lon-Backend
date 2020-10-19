@@ -17,17 +17,20 @@ namespace API.Controllers
         private StudentOfSubjectBusinessIF _studentOfSubjectClass;
         private ListSubjectClassBusinessIF _listSubjectClass;
         private ClassMajorWithRegistionBusinessIF _classMajorWithRegistion;
+        private ListSubjectBusinessIF _listSubject;
         public ClassRegistionController(
             ClassOfStudentBusinessIF a,
             StudentOfSubjectBusinessIF b,
             ListSubjectClassBusinessIF c,
-            ClassMajorWithRegistionBusinessIF d
+            ClassMajorWithRegistionBusinessIF d,
+            ListSubjectBusinessIF e
             )
         {
             _classOfStudent = a;
             _studentOfSubjectClass = b;
             _listSubjectClass = c;
             _classMajorWithRegistion = d;
+            _listSubject = e;
         }
 
 
@@ -69,22 +72,28 @@ namespace API.Controllers
 
 
         }
-        [Route("deleteCO")]
-        [HttpDelete]
-        public IActionResult DeleteUser([FromBody] Dictionary<string, object> formData)
+        [Route("getListSubject/{id_faculty}")]
+        [HttpGet]
+        public List<ListSubject> listSubject(string id_faculty)
         {
-            string id_cr = "";
-            string id_student = "";
-            if (formData.Keys.Contains("id_cr") && !string.IsNullOrEmpty(Convert.ToString(formData["id_cr"])))
-            {
-                id_cr = Convert.ToString(formData["id_cr"]);
-            }
-            if (formData.Keys.Contains("id_student") && !string.IsNullOrEmpty(Convert.ToString(formData["id_student"])))
-            {
-                id_student = Convert.ToString(formData["id_student"]);
-            }
-            _classOfStudent.DeleteCO(id_cr,id_student);
-            return Ok();
+            return _listSubject.GetListSubject(id_faculty);
         }
+        //[Route("deleteCO")]
+        //[HttpDelete]
+        //public IActionResult DeleteUser([FromBody] Dictionary<string, object> formData)
+        //{
+        //    string id_cr = "";
+        //    string id_student = "";
+        //    if (formData.Keys.Contains("id_cr") && !string.IsNullOrEmpty(Convert.ToString(formData["id_cr"])))
+        //    {
+        //        id_cr = Convert.ToString(formData["id_cr"]);
+        //    }
+        //    if (formData.Keys.Contains("id_student") && !string.IsNullOrEmpty(Convert.ToString(formData["id_student"])))
+        //    {
+        //        id_student = Convert.ToString(formData["id_student"]);
+        //    }
+        //    _classOfStudent.DeleteCO(id_cr,id_student);
+        //    return Ok();
+        //}
     }
 }
