@@ -30,6 +30,21 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<ClassOpenByIdFaculty> getListClassOpenByIdFaculty(string id_faculty)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getClassOpenByIdFaculty", "@id_faculty", id_faculty);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<ClassOpenByIdFaculty>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
 
     }
 }

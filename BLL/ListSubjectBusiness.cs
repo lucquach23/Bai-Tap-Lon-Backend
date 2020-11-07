@@ -20,5 +20,9 @@ namespace BLL
         {
             return _res.GetListSubject(id_faculty);
         }
+       public List<ClassOpenByIdFaculty> getListClassOpenByIdFaculty(string id_faculty)
+        {
+            return _res.getListClassOpenByIdFaculty(id_faculty);
+        }
     }
 }

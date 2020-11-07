@@ -8,5 +8,6 @@ namespace BLL.Interfaces
     public partial interface ListSubjectBusinessIF
     {
         List<ListSubject> GetListSubject(string id_faculty);
+        List<ClassOpenByIdFaculty> getListClassOpenByIdFaculty(string id_faculty);
     }
 }

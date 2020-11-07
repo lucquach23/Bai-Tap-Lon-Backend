@@ -78,6 +78,12 @@ namespace API.Controllers
         {
             return _listSubject.GetListSubject(id_faculty);
         }
+        [Route("getListClassOpenByIdFaculty/{id_faculty}")]
+        [HttpGet]
+        public List<ClassOpenByIdFaculty> ListClassOpenByIdFaculty(string id_faculty)
+        {
+            return _listSubject.getListClassOpenByIdFaculty(id_faculty);
+        }
         //[Route("deleteCO")]
         //[HttpDelete]
         //public IActionResult DeleteUser([FromBody] Dictionary<string, object> formData)

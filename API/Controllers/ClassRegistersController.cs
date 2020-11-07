@@ -49,13 +49,13 @@ namespace API.Controllers
             return _context.ClassRegisters.Include(x=>x.IdSubjectNavigation)
                 .Where(x => x.IdLecturers == id_gv).ToList();
         }
-        [Route("laydsloptheomakhoa/{id_khoa}")]
-        [HttpGet]
-        public List<ClassRegister> dsClassOpen(string id_khoa)
-        {
-            return _context.ClassRegisters
-                .Where(x => x.IdLecturers == id_khoa).ToList();
-        }
+        //[Route("laydsloptheomakhoa/{id_khoa}")]
+        //[HttpGet]
+        //public List<ClassRegister> dsClassOpen(string id_khoa)
+        //{
+        //    return _context.ClassRegisters.Include(x=>x.)
+        //        .Where(x => x.IdSubject == id_khoa).ToList();
+        //}
 
 
         [Route("removeAll/{id_gv}")]
