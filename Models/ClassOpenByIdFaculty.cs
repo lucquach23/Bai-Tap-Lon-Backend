@@ -6,6 +6,7 @@ namespace Models
 {
     public class ClassOpenByIdFaculty
     {
+        public string id_ClassRegister { get; set; }
         public string id_subject { get; set; }
         public string name_subject { get; set; }
         public int number_of_credits { get; set; }
@@ -18,6 +19,7 @@ namespace Models
         public string name { get; set; }
         public string email { get; set; }
         public string phone { get; set; }
+        public int SLSV { get; set; }
 
 
     }
