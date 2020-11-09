@@ -24,5 +24,13 @@ namespace BLL
         {
             return _res.getListClassOpenByIdFaculty(id_faculty);
         }
+        public List<gv> get2infogv(string id_faculty)
+        {
+            return _res.get2infogv(id_faculty);
+        }
+        public List<ClassOpenByIdFaculty> getListClassOpenByIdgv(string id_gv)
+        {
+            return _res.getListClassOpenByIdgv(id_gv);
+        }
     }
 }

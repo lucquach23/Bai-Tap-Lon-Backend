@@ -33,7 +33,12 @@ namespace API.Controllers
             _listSubject = e;
         }
 
-
+        [Route("get2infogv/{id_faculty}")]
+        [HttpGet]
+        public List<gv> get2infogv(string id_faculty)
+        {
+            return _listSubject.get2infogv(id_faculty);
+        }
 
 
 
@@ -84,22 +89,11 @@ namespace API.Controllers
         {
             return _listSubject.getListClassOpenByIdFaculty(id_faculty);
         }
-        //[Route("deleteCO")]
-        //[HttpDelete]
-        //public IActionResult DeleteUser([FromBody] Dictionary<string, object> formData)
-        //{
-        //    string id_cr = "";
-        //    string id_student = "";
-        //    if (formData.Keys.Contains("id_cr") && !string.IsNullOrEmpty(Convert.ToString(formData["id_cr"])))
-        //    {
-        //        id_cr = Convert.ToString(formData["id_cr"]);
-        //    }
-        //    if (formData.Keys.Contains("id_student") && !string.IsNullOrEmpty(Convert.ToString(formData["id_student"])))
-        //    {
-        //        id_student = Convert.ToString(formData["id_student"]);
-        //    }
-        //    _classOfStudent.DeleteCO(id_cr,id_student);
-        //    return Ok();
-        //}
+        [Route("getListClassOpenByIdgv/{id_gv}")]
+        [HttpGet]
+        public List<ClassOpenByIdFaculty> ListClassOpenByIdgv(string id_gv)
+        {
+            return _listSubject.getListClassOpenByIdgv(id_gv);
+        }
     }
 }
