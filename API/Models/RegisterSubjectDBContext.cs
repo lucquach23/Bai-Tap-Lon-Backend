@@ -32,7 +32,7 @@ namespace API.Models
         {
             if (!optionsBuilder.IsConfigured)
             {
-//#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. See http://go.microsoft.com/fwlink/?LinkId=723263 for guidance on storing connection strings.
                 optionsBuilder.UseSqlServer("Data Source=ADMIN\\SQLEXPRESS;Initial Catalog=RegisterSubjectDB;Integrated Security=True");
             }
         }
@@ -45,6 +45,11 @@ namespace API.Models
 
                 entity.Property(e => e.FirstName).HasMaxLength(50);
 
+                entity.Property(e => e.IdFaculty)
+                    .HasColumnName("id_faculty")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
                 entity.Property(e => e.LastName).HasMaxLength(50);
 
                 entity.Property(e => e.PassWord)
@@ -54,6 +59,8 @@ namespace API.Models
                 entity.Property(e => e.Role)
                     .HasMaxLength(50)
                     .IsUnicode(false);
+
+                entity.Property(e => e.Token).HasColumnType("text");
 
                 entity.Property(e => e.UserName)
                     .HasMaxLength(50)
@@ -387,6 +394,11 @@ namespace API.Models
 
                 entity.Property(e => e.IdSubject)
                     .HasColumnName("id_subject")
+                    .HasMaxLength(50)
+                    .IsUnicode(false);
+
+                entity.Property(e => e.IdFaculty)
+                    .HasColumnName("id_faculty")
                     .HasMaxLength(50)
                     .IsUnicode(false);
 

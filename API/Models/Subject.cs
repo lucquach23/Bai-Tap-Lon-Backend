@@ -11,6 +11,7 @@ namespace API.Models
         }
 
         public string IdSubject { get; set; }
+        public string IdFaculty { get; set; }
         public string NameSubject { get; set; }
         public int? NumberOfCredits { get; set; }
         public string Type { get; set; }

@@ -15,6 +15,22 @@ namespace DAL
         {
             _dbHelper = dbHelper;
         }
+        public List<sv_hp> getListSVbyIdhp(string id_hp)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getListStudentRegisterSubjectByIdLecturer",
+                     "@id_hp", id_hp);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<sv_hp>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<ClassOfStudent> GetDatabyID(string id)
         {
             string msgError = "";

@@ -20,6 +20,16 @@ namespace API.Controllers
             _context = context;
         }
 
+
+        [Route("getListSubjectByIdFaculty/{id_faculty}")]
+        [HttpGet]
+        public List<Subject> getListSubjectByIdFaculty(string id_faculty)
+        {
+            return _context.Subjects.Where(x => x.IdFaculty == id_faculty).ToList();
+        }
+
+
+
         // GET: api/Subjects
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Subject>>> GetSubjects()

@@ -50,6 +50,13 @@ namespace API.Controllers
             return _classOfStudent.GetDatabyID(id);
         }
 
+        [Route("laysvtheomahp/{id_hp}")]
+        [HttpGet]
+        public List<sv_hp> getsvbymahp(string id_hp)
+        {
+            return _classOfStudent.getListSVbyIdhp(id_hp);
+        }
+
         // api lấy danh sách các sinh viên trong lớp 
         //mà giảng viên đã đăng kí giảng dạy môn đó theo mã giảng viên
         [Route("getListStudentInSubjectClass/{id}")]

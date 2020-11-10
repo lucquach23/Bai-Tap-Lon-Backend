@@ -16,6 +16,10 @@ namespace BLL
         {
             _res = cos;
         }
+        public List<sv_hp> getListSVbyIdhp(string id_hp)
+        {
+            return _res.getListSVbyIdhp(id_hp);
+        }
         public List<ClassOfStudent> GetDatabyID(string id)
         {
             return _res.GetDatabyID(id);
