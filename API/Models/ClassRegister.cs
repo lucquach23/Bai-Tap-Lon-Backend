@@ -9,7 +9,6 @@ namespace API.Models
         {
             ListCrs = new HashSet<ListCr>();
         }
-
         public string IdClassRegister { get; set; }
         public string IdSubject { get; set; }
         public string IdLecturers { get; set; }
@@ -18,7 +17,6 @@ namespace API.Models
         public string Time { get; set; }
         public string Week { get; set; }
         public string Room { get; set; }
-
         public virtual Lecturer IdLecturersNavigation { get; set; }
         public virtual Semester IdSemesterNavigation { get; set; }
         public virtual Subject IdSubjectNavigation { get; set; }

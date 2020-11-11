@@ -6,7 +6,6 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using API.Models;
-
 namespace API.Controllers
 {
     [Route("api/[controller]")]
@@ -14,13 +13,10 @@ namespace API.Controllers
     public class LecturersController : ControllerBase
     {
         private readonly RegisterSubjectDBContext _context;
-
         public LecturersController(RegisterSubjectDBContext context)
         {
             _context = context;
-        }
-
-       
+        }     
         // GET: api/Lecturers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Lecturer>>> GetLecturers()
@@ -43,8 +39,6 @@ namespace API.Controllers
         }
 
         // PUT: api/Lecturers/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutLecturer(string id, Lecturer lecturer)
         {
@@ -75,8 +69,6 @@ namespace API.Controllers
         }
 
         // POST: api/Lecturers
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<Lecturer>> PostLecturer(Lecturer lecturer)
         {

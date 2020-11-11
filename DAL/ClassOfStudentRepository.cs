@@ -31,6 +31,22 @@ namespace DAL
                 throw ex;
             }
         }
+        public List<class_major> get_list_class_major(string id_class)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "getListClassMajor",
+                     "@IdClassMajor", id_class);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<class_major>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public List<ClassOfStudent> GetDatabyID(string id)
         {
             string msgError = "";
@@ -41,6 +57,22 @@ namespace DAL
                 if (!string.IsNullOrEmpty(msgError))
                     throw new Exception(msgError);
                 return dt.ConvertTo<ClassOfStudent>().ToList();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        public List<lop_bm> getlop_bm(string id_faculty)
+        {
+            string msgError = "";
+            try
+            {
+                var dt = _dbHelper.ExecuteSProcedureReturnDataTable(out msgError, "get_class_major_by_id_faculty",
+                     "@id", id_faculty);
+                if (!string.IsNullOrEmpty(msgError))
+                    throw new Exception(msgError);
+                return dt.ConvertTo<lop_bm>().ToList();
             }
             catch (Exception ex)
             {

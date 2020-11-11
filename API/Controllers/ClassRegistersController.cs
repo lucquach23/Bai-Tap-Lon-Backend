@@ -76,8 +76,6 @@ namespace API.Controllers
 
 
         // PUT: api/ClassRegisters/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
         public async Task<IActionResult> PutClassRegister(string id, ClassRegister classRegister)
         {
@@ -85,9 +83,7 @@ namespace API.Controllers
             {
                 return BadRequest();
             }
-
             _context.Entry(classRegister).State = EntityState.Modified;
-
             try
             {
                 await _context.SaveChangesAsync();
@@ -95,21 +91,13 @@ namespace API.Controllers
             catch (DbUpdateConcurrencyException)
             {
                 if (!ClassRegisterExists(id))
-                {
                     return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                else throw;
             }
-
             return NoContent();
         }
 
         // POST: api/ClassRegisters
-        // To protect from overposting attacks, enable the specific properties you want to bind to, for
-        // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
         public async Task<ActionResult<ClassRegister>> PostClassRegister(ClassRegister classRegister)
         {
@@ -121,15 +109,9 @@ namespace API.Controllers
             catch (DbUpdateException)
             {
                 if (ClassRegisterExists(classRegister.IdClassRegister))
-                {
                     return Conflict();
-                }
-                else
-                {
-                    throw;
-                }
+                else throw;
             }
-
             return CreatedAtAction("GetClassRegister", new { id = classRegister.IdClassRegister }, classRegister);
         }
 
@@ -142,7 +124,6 @@ namespace API.Controllers
             {
                 return NotFound();
             }
-
             _context.ClassRegisters.Remove(classRegister);
             await _context.SaveChangesAsync();
 

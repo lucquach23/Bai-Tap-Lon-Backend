@@ -32,16 +32,12 @@ namespace API.Controllers
             _classMajorWithRegistion = d;
             _listSubject = e;
         }
-
         [Route("get2infogv/{id_faculty}")]
         [HttpGet]
         public List<gv> get2infogv(string id_faculty)
         {
             return _listSubject.get2infogv(id_faculty);
         }
-
-
-
         // api lấy danh sách các lớp mà sinh viên đã đăng kí học theo mã sinh viên
         [Route("getClassOfStudentById/{id}")]
         [HttpGet]
@@ -56,7 +52,18 @@ namespace API.Controllers
         {
             return _classOfStudent.getListSVbyIdhp(id_hp);
         }
-
+        [Route("getClassMajorByIdClass/{id_class}")]
+        [HttpGet]
+        public List<class_major> getClassMajorByIdClass(string id_class)
+        {
+            return _classOfStudent.get_list_class_major(id_class);
+        }
+        [Route("classMajorByFaculty/{id_faculty}")]
+        [HttpGet]
+        public List<lop_bm> getClassMajorByFaculty(string id_faculty)
+        {
+            return _classOfStudent.getlop_bm(id_faculty);
+        }
         // api lấy danh sách các sinh viên trong lớp 
         //mà giảng viên đã đăng kí giảng dạy môn đó theo mã giảng viên
         [Route("getListStudentInSubjectClass/{id}")]
