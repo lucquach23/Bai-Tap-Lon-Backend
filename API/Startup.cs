@@ -121,20 +121,12 @@ namespace API
             {
                 app.UseDeveloperExceptionPage();
             }
-            //app.UseCors(builder =>
-            //{
-            //    builder.WithOrigins("http://localhost:4200");
-            //    builder.AllowAnyMethod();
-            //    builder.AllowAnyHeader();
-            //});
-
-            // global cors policy
+          
             app.UseCors(x => x
                 .AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader());
-           // app.UseCors("AllowAll");
-            //app.UseApiMiddleware();
+          
             app.UseAuthentication();
             app.UseAuthorization();
 
@@ -145,6 +137,7 @@ namespace API
             app.UseRouting();
             app.UseAuthorization();
             app.UseDeveloperExceptionPage();
+
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
